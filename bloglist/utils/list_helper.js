@@ -15,7 +15,7 @@ const favoriteBlog = (blogs) => {
   const blogWithMaxLikes = blogs.find((blog) => blog.likes === maxLikes)
 
   return blogs.length === 0
-    ? 0
+    ? null
     : {
         title: blogWithMaxLikes.title,
         author: blogWithMaxLikes.author,

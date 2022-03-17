@@ -15,7 +15,7 @@ describe("total likes", () => {
   test("of empty list is zero", () => {
     const blogs = []
     const result = listHelper.favoriteBlog(blogs)
-    expect(result).toBe(0)
+    expect(result).toBe(null)
   })
 
   test("when list has only one blog, equals that one", () => {
