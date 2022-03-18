@@ -34,6 +34,26 @@ test("blogs have ids", async () => {
   }
 })
 
+test("a valid blog can be added ", async () => {
+  const newBlog = {
+    title: "React patterns",
+    author: "Michael Chan",
+    likes: 7,
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+  const titles = blogsAtEnd.map((n) => n.title)
+  expect(titles).toContain("React patterns")
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

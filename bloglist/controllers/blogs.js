@@ -16,7 +16,7 @@ blogsRouter.post("/", async (request, response) => {
   })
 
   const savedBlog = await blog.save()
-  response.json(savedBlog)
+  response.status(201).json(savedBlog)
 })
 
 
