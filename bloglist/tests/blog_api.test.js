@@ -73,6 +73,17 @@ test("likes default to 0 if missing", async () => {
   expect(newBlogInDb.likes).toBe(0)
 })
 
+test("title and url missing, respose is 400", async () => {
+  const newBlog = {
+    author: "Nevena Radovic",
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(400)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
