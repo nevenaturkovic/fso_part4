@@ -34,7 +34,7 @@ test("blogs have ids", async () => {
   }
 })
 
-test("a valid blog can be added ", async () => {
+test("a valid blog can be added", async () => {
   const newBlog = {
     title: "React patterns",
     author: "Michael Chan",
@@ -52,6 +52,25 @@ test("a valid blog can be added ", async () => {
 
   const titles = blogsAtEnd.map((n) => n.title)
   expect(titles).toContain("React patterns")
+})
+
+test("likes default to 0 if missing", async () => {
+  const newBlog = {
+    title: "Likes missing",
+    author: "Nevena Radovic",
+  }
+
+  await api
+    .post("/api/blogs")
+    .send(newBlog)
+    .expect(201)
+    .expect("Content-Type", /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+  const newBlogInDb = blogsAtEnd.find((blog) => blog.title === "Likes missing")
+  expect(newBlogInDb.likes).toBe(0)
 })
 
 afterAll(() => {
