@@ -2,5 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "branasdivineworld"
+    "url": "https://reactpatterns.com/",
+    "title": "Superblog",
+    "author": "Superuser",
+    "likes": 10
 }
