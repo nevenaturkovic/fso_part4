@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYyM2RiMTYxOGJiNzM3YzUwYTFmN2E3NCIsImlhdCI6MTY0ODQ2ODE1M30.Uth0poBIsn8Q5VJBX_CD4if2ry4bF2RNdQliaDHzjnE
 
 {
     "url": "https://reactpatterns.com/",
-    "title": "Superblog",
+    "title": "Superblog Again",
     "author": "Superuser",
     "likes": 10
 }
