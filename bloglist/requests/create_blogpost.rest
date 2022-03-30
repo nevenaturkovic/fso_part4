@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5vdmkyIiwiaWQiOiI2MjQzZjNmNDk2ZDVhMWNhM2RmMmJiNTMiLCJpYXQiOjE2NDg2MjA1NDIsImV4cCI6MTY0ODYyNDE0Mn0.mSREMBMHs9eSAKy8vPho_MFk06gyiob3G4k2PHwa6jQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZsZWtpY2ExMiIsImlkIjoiNjI0NDQ5OTcxMzExNDNjZTlmZDI0N2Q3IiwiaWF0IjoxNjQ4NjQyNDY3LCJleHAiOjE2NDg2NDYwNjd9.7nhc8nd29itMHwrXqYvRiaOkT0Sw4xkgrBH6vKPr8PY
 
 {
     "url": "https://google.com/",
     "title": "Skroz Novi User's blogpost",
-    "author": "Skroz Novi User",
+    "author": "Flekica",
     "likes": 12
 }
