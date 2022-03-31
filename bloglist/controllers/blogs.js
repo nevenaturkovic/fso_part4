@@ -11,37 +11,48 @@ blogsRouter.get("/", async (request, response) => {
 blogsRouter.post("/", async (request, response) => {
   const body = request.body
   const user = request.user
-  if (body.title === undefined && body.url === undefined) {
-    response.status(400).end()
+
+  if (user) {
+    if (body.title === undefined && body.url === undefined) {
+      response.status(400).end()
+      return
+    }
+
+    const blog = new Blog({
+      url: body.url,
+      title: body.title,
+      author: body.author,
+      user: user._id,
+      likes: body.likes || 0,
+    })
+
+    const savedBlog = await blog.save()
+    user.blogs = user.blogs.concat(savedBlog._id)
+    await user.save()
+
+    response.status(201).json(savedBlog)
+  } else {
+    response.status(401).end()
     return
   }
-
-  const blog = new Blog({
-    url: body.url,
-    title: body.title,
-    author: body.author,
-    user: user._id,
-    likes: body.likes || 0,
-  })
-
-  const savedBlog = await blog.save()
-  user.blogs = user.blogs.concat(savedBlog._id)
-  await user.save()
-
-  response.status(201).json(savedBlog)
 })
 
 blogsRouter.delete("/:id", async (request, response) => {
   const user = request.user
-  const blog = await Blog.findById(request.params.id)
-  if (blog.user.toString() === user._id.toString()) {
-    await Blog.findByIdAndRemove(request.params.id)
+  if (user) {
+    const blog = await Blog.findById(request.params.id)
+    if (blog.user.toString() === user._id.toString()) {
+      await Blog.findByIdAndRemove(request.params.id)
+    } else {
+      return response
+        .status(401)
+        .json({ error: "only the author can delete a blogpost" })
+    }
+    response.status(204).end()
   } else {
-    return response
-      .status(401)
-      .json({ error: "only the author can delete a blogpost" })
+    response.status(401).end()
+    return
   }
-  response.status(204).end()
 })
 
 blogsRouter.put("/:id", async (request, response, next) => {
